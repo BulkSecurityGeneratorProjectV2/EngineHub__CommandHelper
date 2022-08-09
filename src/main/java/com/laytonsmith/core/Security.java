@@ -34,7 +34,7 @@ public final class Security {
 					baseFinal = baseFinal.substring(0, baseFinal.length() - 1);
 				}
 				File loc = new File(location);
-				if(loc.getCanonicalPath().startsWith(baseFinal)) {
+				if(loc.getCanonicalFile().toPath().startsWith(baseFinal)) {
 					return true;
 				}
 			}

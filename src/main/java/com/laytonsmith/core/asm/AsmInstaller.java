@@ -200,7 +200,7 @@ public class AsmInstaller {
 			}
 			for(File fullVersion : buildTool.listFiles()) {
 				try {
-					if(fullVersion.getCanonicalPath().startsWith(withVersion.getCanonicalPath())) {
+					if(fullVersion.getCanonicalFile().toPath().startsWith(withVersion.getCanonicalFile().toPath())) {
 						return fullVersion;
 					}
 				} catch (IOException e) {

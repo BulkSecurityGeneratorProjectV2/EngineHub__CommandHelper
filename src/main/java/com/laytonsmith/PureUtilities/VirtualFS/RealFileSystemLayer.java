@@ -23,17 +23,17 @@ public class RealFileSystemLayer extends FileSystemLayer {
 		super(path, fileSystem, symlink);
 		if(symlink == null) {
 			real = new File(fileSystem.root, path.getPath());
-			if(!real.getCanonicalPath().startsWith(fileSystem.root.getCanonicalPath())) {
+			if(!real.getCanonicalFile().toPath().startsWith(fileSystem.root.getCanonicalFile().toPath())) {
 				throw new PermissionException(path.getPath() + " extends above the root directory of this file system, and does not point to a valid file.");
 			}
 		} else {
 			File symlinkRoot = new File(fileSystem.symlinkFile, symlink);
 			real = new File(symlinkRoot, path.getPath());
 			//If the path extends above the symlink, disallow it
-			if(!real.getCanonicalPath().startsWith(symlinkRoot.getCanonicalPath())) {
+			if(!real.getCanonicalFile().toPath().startsWith(symlinkRoot.getCanonicalFile().toPath())) {
 				//Unless of course, the path is still within the full real path, then
 				//eh, we'll allow it.
-				if(!real.getCanonicalPath().startsWith(fileSystem.root.getCanonicalPath())) {
+				if(!real.getCanonicalFile().toPath().startsWith(fileSystem.root.getCanonicalFile().toPath())) {
 					throw new PermissionException(path.getPath() + " extends above the root directory of this file system, and does not point to a valid file.");
 				}
 			}
